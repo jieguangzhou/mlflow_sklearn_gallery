@@ -46,7 +46,7 @@ def create_model_version(model_name, run_id=None, auto_replace=True):
             client.transition_model_version_stage(
                 model_name, version=version.version, stage='Archived')
 
-    uri = f"runs:/{run_id}/sklearn-model"
+    uri = f"runs:/{run_id}/sklearn_model"
     mv = mlflow.register_model(uri, model_name)
     client.transition_model_version_stage(
         model_name, version=mv.version, stage='Production')
