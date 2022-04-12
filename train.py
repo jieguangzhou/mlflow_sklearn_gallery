@@ -26,6 +26,9 @@ def get_training_func(algorithm):
     elif algorithm == 'lightgbm':
         from core.training.lightgbm import train_lightgbm as training_func
 
+    elif algorithm == 'xgboost':
+        from core.training.xgboost import train_xgboost as training_func
+
     else:
         assert f'{algorithm} not supported'
 
