@@ -29,6 +29,9 @@ def get_training_func(algorithm):
     elif algorithm == 'xgboost':
         from core.training.xgboost import train_xgboost as training_func
 
+    elif algorithm == 'lr':
+        from core.training.lr import train_lr as training_func
+
     else:
         assert f'{algorithm} not supported'
 
