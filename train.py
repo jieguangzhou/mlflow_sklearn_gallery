@@ -8,10 +8,10 @@ import mlflow
 import mlflow.sklearn
 
 
-def load_csv_data(data_path, label_column):
+def load_csv_data(data_path, label_column, random_state=1):
 
     data = pd.read_csv(data_path)
-    train, test = train_test_split(data)
+    train, test = train_test_split(data, random_state=random_state)
     train_x = train.drop([label_column], axis=1)
     test_x = test.drop([label_column], axis=1)
     train_y = train[[label_column]]
@@ -62,11 +62,13 @@ def create_model_version(model_name, run_id=None, auto_replace=True):
 @click.command()
 @click.option('--algorithm')
 @click.option('--data_path')
-@click.option('--label_column', default='class')
+@click.option('--label_column', default='label')
 @click.option('--model_name')
-def main(algorithm, data_path, label_column, model_name):
+@click.option('--random_state', default=1)
+def main(algorithm, data_path, label_column, model_name, random_state):
 
-    train_x, train_y, test_x, test_y = load_csv_data(data_path, label_column)
+    train_x, train_y, test_x, test_y = load_csv_data(
+        data_path, label_column, random_state=random_state)
     training_func = get_training_func(algorithm)
 
     with mlflow.start_run() as run:
