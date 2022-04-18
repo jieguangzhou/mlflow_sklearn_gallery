@@ -11,6 +11,6 @@ dependencies:
     - click
     - lightgbm
     - Pillow
-    - xgboost
+    - xgboost==1.5.2
 
 
