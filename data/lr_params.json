@@ -1,0 +1,4 @@
+{
+  "max_iter":"200",
+  "class_weight":"balanced"
+}
