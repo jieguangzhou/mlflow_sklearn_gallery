@@ -122,5 +122,4 @@ class SVMParams(Params):
         params = deepcopy(inspect.getfullargspec(
             SVC).kwonlydefaults)
 
-
         return params
