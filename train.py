@@ -2,7 +2,7 @@ import click
 import mlflow
 import mlflow.sklearn
 
-from core.data import load_csv_data
+from core.data import load_data
 
 
 def get_training_func(algorithm):
@@ -52,12 +52,12 @@ def create_model_version(model_name, run_id=None, auto_replace=True):
 @click.option("--data_path")
 @click.option("--label_column", default="label")
 @click.option("--model_name", default=None)
-@click.option("--random_state", default=1)
+@click.option("--random_state", default=0)
 @click.option("--param_file", default=None)
 @click.option("--params", default=None)
 def main(algorithm, data_path, label_column, model_name, random_state, param_file, params):
 
-    train_x, train_y, test_x, test_y = load_csv_data(
+    train_x, train_y, test_x, test_y = load_data(
         data_path, label_column, random_state=random_state
     )
     training_func = get_training_func(algorithm)
