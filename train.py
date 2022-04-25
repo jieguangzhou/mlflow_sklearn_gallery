@@ -55,7 +55,8 @@ def create_model_version(model_name, run_id=None, auto_replace=True):
 @click.option("--random_state", default=0)
 @click.option("--param_file", default=None)
 @click.option("--params", default=None)
-def main(algorithm, data_path, label_column, model_name, random_state, param_file, params):
+@click.option("--search_params", default=None)
+def main(algorithm, data_path, label_column, model_name, random_state, param_file, params, search_params):
 
     train_x, train_y, test_x, test_y = load_data(
         data_path, label_column, random_state=random_state
@@ -68,7 +69,9 @@ def main(algorithm, data_path, label_column, model_name, random_state, param_fil
                                        test_x,
                                        test_y,
                                        param_file=param_file,
-                                       params=params,)
+                                       params=params,
+                                       search_params=search_params,
+                                       )
         print(metrics)
         mlflow.log_metrics(metrics)
         mlflow.sklearn.log_model(model, artifact_path="sklearn_model")
